@@ -1,3 +1,6 @@
+<%@ page import="org.iesvdm.jsp_servlet_jdbc.model.Socio" %>
+<%@ page import="org.iesvdm.jsp_servlet_jdbc.dao.SocioDAOImpl" %>
+<%@ page import="java.util.Optional" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +15,10 @@
         <div class="col-12 h2">Introduzca los datos del nuevo socio</div>
     </div>
 </div>
+<%
+    SocioDAOImpl sImpl = new SocioDAOImpl();
+    Optional<Socio> sOpt1 = sImpl.find(Integer.parseInt(request.getParameter("codigo")));
+%>
 <div class="container bg-light">
     <form method="post" action="EditarSociosServlet">
         <div class="row body mt-2 ">
@@ -20,19 +27,19 @@
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Nombre</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="nombre"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="nombre"  value="<%= sOpt1.get().getNombre()%>" /></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Estatura</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="estatura"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="estatura" value="<%= sOpt1.get().getEstatura()%>"/></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Edad</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="edad"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="edad"  value="<%= sOpt1.get().getEdad()%>"   /></div>
         </div>
         <div class="row body mt-2">
             <div class="col-md-6 align-self-center">Localidad</div>
-            <div class="col-md-6 align-self-center"><input type="text" name="localidad"/></div>
+            <div class="col-md-6 align-self-center"><input type="text" name="localidad" value="<%= sOpt1.get().getLocalidad()%>" /></div>
         </div>
         <div class="row mt-2">
             <div class="col-md-6">
@@ -40,7 +47,9 @@
             </div>
             <div class="col-md-6 align-self-center">
                 <input class="btn btn-primary" type="submit" value="Aceptar">
+                <a class="btn btn-primary"  href="ListarSociosServlet">Volver</a>
             </div>
+
         </div>
     </form>
     <%

@@ -36,6 +36,7 @@
       </div>
       <div class="col-md-6 align-self-center">
         <input class="btn btn-primary" type="submit" value="Aceptar">
+        <a class="btn btn-primary"  href="ListarSociosServlet">Volver</a>
       </div>
     </div>
   </form>
