@@ -71,4 +71,22 @@ public class UtilServlet {
         return Optional.empty();
 
     }
+    public static Optional<Integer> validaEditar(HttpServletRequest request) {
+
+        //CÓDIGO DE VALIDACIÓN
+        boolean valida = true;
+        int socioID = -1;
+
+        try {
+            socioID = Integer.parseInt(request.getParameter("codigo")); // viene del formulario
+
+            return Optional.of(socioID);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        //FIN CÓDIGO DE VALIDACIÓN
+        return Optional.empty();
+
+    }
 }
