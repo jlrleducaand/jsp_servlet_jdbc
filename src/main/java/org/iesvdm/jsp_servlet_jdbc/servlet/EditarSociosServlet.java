@@ -18,7 +18,7 @@ import java.util.Optional;
 
 //                      v--NOMBRE DEL SERVLET           v--RUTAS QUE ATIENDE, PUEDE SER UN ARRAY {"/GrabarSociosServlet", "/grabar-socio"}
 @WebServlet(name = "EditarSociosServlet", value = "/EditarSociosServlet")
-public class EditarSociosServlet extends HttpServlet {
+public class EditarSociosServlet extends HttpServlet  {
 
 
     private SocioDAO socioDAO = new SocioDAOImpl();
@@ -26,10 +26,9 @@ public class EditarSociosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/formularioEditarSocioB.jsp");
 
-        dispatcher.forward(request, response); // LA REDIRECCIÓN INTERNA EN EL SERVIDOR A UNA JSP O VISTA.
+        dispatcher.forward(request, response); // DISPARA LA REDIRECCIÓN INTERNA EN EL SERVIDOR A UNA JSP O VISTA.
 
     }
 
@@ -39,22 +38,16 @@ public class EditarSociosServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = null;
 
-        Optional<Integer> optionalIdSocio = UtilServlet.validaEditar(request);
-
+        Optional<Socio> optionalSocio = UtilServlet.validaGrabar(request);
         //SI OPTIONAL CON SOCIO PRESENTE <--> VALIDA OK
-        if (optionalIdSocio.isPresent()) {
+        if (optionalSocio.isPresent() ) {
 
             //ACCEDO AL VALOR DE OPTIONAL DE SOCIO
-            Integer socioID = optionalIdSocio.get();
+            Socio socio = optionalSocio.get();
 
-            //PERSITO EL SOCIO ACTUALIZADO EN BBDD
-            this.socioDAO.update( new Socio (
-                    Integer.parseInt(request.getParameter("codigo")),
-                    request.getParameter("nombre"),
-                    Integer.parseInt(request.getParameter("estatura")),
-                    Integer.parseInt(request.getParameter("edad")),
-                    request.getParameter("localidad")
-            ));
+            //PERSISTO EL SOCIO ACTUALIZADO EN BBDD
+            this.socioDAO.update(socio);
+
 
             //CARGO TODO EL LISTADO DE SOCIOS DE BBDD CON EL NUEVO
             List<Socio> listado = this.socioDAO.getAll();
@@ -62,7 +55,7 @@ public class EditarSociosServlet extends HttpServlet {
             request.setAttribute("listado", listado);
 
             //PARA LANZAR UN MODAL Y UN EFECTO SCROLL EN LA VISTA JSP
-            request.setAttribute("newSocioID", socioID);
+            request.setAttribute("newSocioID", socio.getSocioId());
 
             dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/listadoSociosB.jsp");
 

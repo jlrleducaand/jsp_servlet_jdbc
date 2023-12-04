@@ -80,7 +80,6 @@ public class UtilServlet {
         try {
             socioID = Integer.parseInt(request.getParameter("codigo")); // viene del formulario
 
-
             return Optional.of(socioID);
 
         } catch (Exception ex) {
