@@ -27,9 +27,9 @@
     </div>
     <div class="row">
         <div class="col-md-1 h3">ID</div>
-        <div class="col-md-4 h3">Nombre</div>
+        <div class="col-md-3 h3">Nombre</div>
         <div class="col-md-1 h3">Edad</div>
-        <div class="col-md-1 h3">Estatura</div>
+        <div class="col-md-2 h3">Estatura</div>
         <div class="col-md-3 h3">Localidad</div>
         <div class="col-md-2 h3 text-center">Operación</div>
     </div>
@@ -45,11 +45,11 @@
     <div id="<%=socio.getSocioId()%>" class="row mt-2 body">
         <div class="col-md-1 align-self-center"><%=socio.getSocioId() %>
         </div>
-        <div class="col-md-4 align-self-center"><%=socio.getNombre() %>
+        <div class="col-md-3 align-self-center"><%=socio.getNombre() %>
         </div>
         <div class="col-md-1 align-self-center"><%=socio.getEdad() %>
         </div>
-        <div class="col-md-1 align-self-center"><%=socio.getEstatura() %>
+        <div class="col-md-2 align-self-center"><%=socio.getEstatura() %>
         </div>
         <div class="col-md-3 align-self-center"><%=socio.getLocalidad()%>
         </div>
