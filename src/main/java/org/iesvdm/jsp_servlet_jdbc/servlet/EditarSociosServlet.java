@@ -38,7 +38,7 @@ public class EditarSociosServlet extends HttpServlet  {
 
         RequestDispatcher dispatcher = null;
 
-        Optional<Socio> optionalSocio = UtilServlet.validaGrabar(request);
+        Optional<Socio> optionalSocio = UtilServlet.validaEditarPost(request);
         //SI OPTIONAL CON SOCIO PRESENTE <--> VALIDA OK
         if (optionalSocio.isPresent() ) {
 
